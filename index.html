@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,intial-scale=1">
+        <title>WebAR</title>
+    </head>
+<body style="margin:0px; overflow:hidden;">
+<!-- A-Frame ライブラリの読み込み -->
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>	
+<!-- AR.js ライブラリの読み込み -->
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+<!-- こっからA-Frame -->
+    <a-scene embedded arjs="debugUIEnabled:false;trackingMethod:best;" vr-mode-ui="enabled: false">
+    <!-- オブジェクトファイルとマテリアルファイルを読み込む -->
+	<a-assets>
+        <a-asset-item id="fal-obj" src="model_fal/fal/fal.obj"></a-asset-item>
+        <a-asset-item id="fal-mtl" src="model_fal/fal/fal.obj.mtl"></a-asset-item>
+    </a-assets>
+	                    <!-- こっからARの世界。マーカー上になにを展開するかを書く -->
+    <a-marker type="pattern" url="fal.patt">
+		<a-entity>
+          <a-obj-model id="fal" src="#fal-obj" mtl="#fal-mtl" position="0 0 0" scale="0.2 0.2 0.2" rotation="0 0 0"></a-obj-model>
+		  <a-animation attribute="rotation" to="0 360 0" dur="6000" repeat="indefinite" easing="linear"></a-animation>
+		</a-entity>
+    </a-marker>
+	 <!-- arなのでこんな感じでカメラが必要らしい。 -->
+    <a-entity camera></a-entity>
+</a-scene>
+<!-- ここまででA-Frameおわり -->
+</body>
+</html>
